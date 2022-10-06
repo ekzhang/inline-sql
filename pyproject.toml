@@ -36,12 +36,13 @@ path = "inline_sql/__about__.py"
 
 [tool.hatch.envs.default]
 dependencies = [
+  "black",
   "pytest",
   "pytest-cov",
 ]
 [tool.hatch.envs.default.scripts]
 cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=inline_sql --cov=tests"
-no-cov = "cov --no-cov"
+format = "black ."
 
 [[tool.hatch.envs.test.matrix]]
 python = ["37", "38", "39", "310", "311"]
