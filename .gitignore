@@ -1,0 +1,5 @@
+# Python files
+__pycache__/
+.pytest_cache/
+.coverage
+dist/
