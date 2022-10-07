@@ -4,24 +4,25 @@ build-backend = "hatchling.build"
 
 [project]
 name = "inline-sql"
-description = ''
+description = "Inline SQL in any Python program, on local dataframes"
 readme = "README.md"
 requires-python = ">=3.7"
 license = "MIT"
-keywords = []
+keywords = ["database", "sql", "language"]
 authors = [
   { name = "Eric Zhang", email = "ekzhang1@gmail.com" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
-  "Programming Language :: Python",
+  "Intended Audience :: Developers",
   "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
+  "Programming Language :: SQL",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Database",
+  "Topic :: Software Development :: Libraries",
 ]
 dependencies = []
 dynamic = ["version"]
@@ -45,7 +46,7 @@ cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=inline
 format = "black ."
 
 [[tool.hatch.envs.test.matrix]]
-python = ["37", "38", "39", "310", "311"]
+python = ["37", "38", "39", "310"]
 
 [tool.coverage.run]
 branch = true
