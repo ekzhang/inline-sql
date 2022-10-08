@@ -1,4 +1,5 @@
 import duckdb
+import pandas as pd
 import pytest
 
 from inline_sql import sql, sql_val
@@ -48,3 +49,16 @@ def test_params():
     assert sql_val^ "SELECT $x + $x" == 10  # fmt: skip
     assert sql_val^ "SELECT $x + $x + $x" == 15  # fmt: skip
     assert sql_val^ "SELECT $x + $x + $x + $x" == 20  # fmt: skip
+
+
+def test_inline_df():
+    df = pd.DataFrame({"x": [1, 2, 3], "y": [4, 2, 2]})
+    assert len(sql^ "SELECT * FROM df") == 3  # fmt: skip
+    assert len(sql^ "SELECT * FROM df a, df b WHERE a.x = b.y") == 2  # fmt: skip
+    assert sql_val^ """
+        SELECT COUNT(*) FROM (
+            SELECT * FROM df a
+            LEFT JOIN df b ON a.x = b.y
+            LEFT JOIN df c ON b.x = c.y
+        )
+    """ == 5  # fmt: skip
