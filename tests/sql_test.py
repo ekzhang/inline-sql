@@ -56,7 +56,7 @@ def test_inline_df():
     assert len(sql^ "SELECT * FROM df") == 3  # fmt: skip
     assert len(sql^ "SELECT * FROM df a, df b WHERE a.x = b.y") == 2  # fmt: skip
     assert sql_val^ """
-        SELECT COUNT(*) FROM (
+        SELECT COUNT() FROM (
             SELECT * FROM df a
             LEFT JOIN df b ON a.x = b.y
             LEFT JOIN df c ON b.x = c.y

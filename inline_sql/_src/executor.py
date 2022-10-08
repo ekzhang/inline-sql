@@ -15,11 +15,11 @@ class InlineSQL(Generic[T]):
     from inline_sql import sql, sql_val
 
     sql_val^ "SELECT 1 + 1"  # => 2
-    sql_val^ "SELECT COUNT(*) FROM 'disasters.csv'"  # => 803
+    sql_val^ "SELECT COUNT() FROM 'disasters.csv'"  # => 803
 
     n = 50
     df = sql^ "SELECT * FROM 'disasters.csv' LIMIT $n"  # => pd.DataFrame({...})
-    sql_val^ "SELECT COUNT(*) FROM df"  # => 50
+    sql_val^ "SELECT COUNT() FROM df"  # => 50
     ```
     """
 

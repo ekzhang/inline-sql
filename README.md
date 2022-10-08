@@ -17,7 +17,7 @@ def head_data(count: int) -> pd.DataFrame:
 cars = head_data(50)
 
 origin_counts = sql^ """
-    SELECT origin, COUNT(*) FROM cars
+    SELECT origin, COUNT() FROM cars
     GROUP BY origin
     ORDER BY count DESC
 """
@@ -58,7 +58,7 @@ The exported `sql` and `sql_val` variables are magic objects that can be used to
 2  All natural disasters  1902    46037
 3  All natural disasters  1903     6506
 4  All natural disasters  1905    22758
->>> def total_deaths(entity: str):
+>>> def total_deaths(entity: str) -> float:
 ...     return sql_val^ "SELECT SUM(deaths) FROM disasters WHERE Entity = $entity"
 ...
 >>> total_deaths("Drought")
