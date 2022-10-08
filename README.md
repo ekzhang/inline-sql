@@ -30,7 +30,7 @@ print(sql_val^ """
 """)
 ```
 
-`inline_sql` operates directly on an in-memory database. You can access local datasets (pandas frames), CSV files, and interpolate variables seamlessly into queries. Internally, this is implemented as a small wrapper around [DuckDB](https://duckdb.org/).
+Operations in the `inline_sql` library directly use an in-memory database. You can access local datasets (pandas frames), CSV files, and interpolate variables seamlessly into queries. Internally, this is implemented as a small wrapper around [DuckDB](https://duckdb.org/).
 
 ## Installation
 
@@ -46,11 +46,15 @@ The exported `sql` and `sql_val` variables are magic objects that can be used to
 
 ```python
 >>> from inline_sql import sql, sql_val
+
 >>> sql_val^ "SELECT 1 + 1"
 2
+
 >>> x = 5
+
 >>> sql_val^ "SELECT 2 * $x"
 10
+
 >>> sql^ "SELECT * FROM 'disasters.csv' LIMIT 5"
                   Entity  Year   Deaths
 0  All natural disasters  1900  1267360
@@ -58,11 +62,14 @@ The exported `sql` and `sql_val` variables are magic objects that can be used to
 2  All natural disasters  1902    46037
 3  All natural disasters  1903     6506
 4  All natural disasters  1905    22758
+
 >>> def total_deaths(entity: str) -> float:
 ...     return sql_val^ "SELECT SUM(deaths) FROM disasters WHERE Entity = $entity"
 ...
+
 >>> total_deaths("Drought")
 11731294.0
+
 >>> total_deaths("Earthquake")
 2576801.0
 ```
