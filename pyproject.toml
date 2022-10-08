@@ -24,7 +24,11 @@ classifiers = [
   "Topic :: Database",
   "Topic :: Software Development :: Libraries",
 ]
-dependencies = []
+dependencies = [
+  "duckdb~=0.5.1",
+  "pandas~=1.5.0",
+  "sqlparse~=0.4.3",
+]
 dynamic = ["version"]
 
 [project.urls]
