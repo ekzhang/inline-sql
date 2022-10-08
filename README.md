@@ -6,28 +6,10 @@
 A simple embedded language for running inline SQL in Python programs.
 
 ```python
-import pandas as pd
 from inline_sql import sql, sql_val
 
-
-def head_data(count: int) -> pd.DataFrame:
-    return sql^ "SELECT * FROM 'cars.csv' LIMIT $count"
-
-
-cars = head_data(50)
-
-origin_counts = sql^ """
-    SELECT origin, COUNT() FROM cars
-    GROUP BY origin
-    ORDER BY count DESC
-"""
-print(origin_counts)
-
-most_common = origin_counts.origin[0]
-print(sql_val^ """
-    SELECT AVG(horsepower) FROM cars
-    WHERE origin = $most_common
-""")
+assert sql_val^ "SELECT 1 + 1" == 2
+assert sql_val^ "SELECT COUNT() FROM 'disasters.csv'" == 803
 ```
 
 Operations in the `inline_sql` library directly use an in-memory database. You can access local datasets (pandas frames), CSV files, and interpolate variables seamlessly into queries. Internally, this is implemented as a small wrapper around [DuckDB](https://duckdb.org/).
@@ -75,6 +57,35 @@ The exported `sql` and `sql_val` variables are magic objects that can be used to
 ```
 
 You can run any SQL query as described in the [DuckDB documentation](https://duckdb.org/docs/guides/).
+
+## Library Use
+
+You can use `inline_sql` as a library. Since results from queries are ordinary `pandas.DataFrame` objects, they work in functions and application code. Here's a longer example:
+
+```python
+import pandas as pd
+from inline_sql import sql, sql_val
+
+
+def head_data(count: int) -> pd.DataFrame:
+    return sql^ "SELECT * FROM 'cars.csv' LIMIT $count"
+
+
+cars = head_data(50)
+
+origin_counts = sql^ """
+    SELECT origin, COUNT() FROM cars
+    GROUP BY origin
+    ORDER BY count DESC
+"""
+print(origin_counts)
+
+most_common = origin_counts.origin[0]
+print(sql_val^ """
+    SELECT AVG(horsepower) FROM cars
+    WHERE origin = $most_common
+""")
+```
 
 ## Acknowledgements
 
