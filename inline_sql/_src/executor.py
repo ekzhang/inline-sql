@@ -1,3 +1,4 @@
+import inspect
 from typing import Generic, TypeVar
 
 from .runtime import run_query
@@ -27,7 +28,14 @@ class InlineSQL(Generic[T]):
 
     def __xor__(self, query: str) -> T:
         """Run an inline SQL query."""
-        df = run_query(query, {})
+        frame = inspect.currentframe()
+        try:
+            f_locals, f_globals = frame.f_back.f_locals, frame.f_back.f_globals
+            context = {**f_globals, **f_locals}
+        finally:
+            del frame
+
+        df = run_query(query, context)
         if self.scalar:
             if len(df) > 1:
                 raise RuntimeError("Scalar query returned more than one row.")

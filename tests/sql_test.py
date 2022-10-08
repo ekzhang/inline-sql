@@ -39,3 +39,12 @@ def test_query_df():
     assert df.iloc[0, 0] == 1
     assert df.iloc[0, 1] == 2
     assert list(df.columns) == ["x", "y"]
+
+
+def test_params():
+    x, y = 5, 6
+    assert sql_val^ "SELECT $x + $y" == 11  # fmt: skip
+    assert sql_val^ "SELECT $y + $x" == 11  # fmt: skip
+    assert sql_val^ "SELECT $x + $x" == 10  # fmt: skip
+    assert sql_val^ "SELECT $x + $x + $x" == 15  # fmt: skip
+    assert sql_val^ "SELECT $x + $x + $x + $x" == 20  # fmt: skip

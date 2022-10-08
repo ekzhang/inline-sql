@@ -15,7 +15,7 @@ def prepare_query(query: str) -> Tuple[str, List[str]]:
         raise ValueError("Only SELECT statements are supported.")
     new_tokens: List[str] = []
     params_map: Dict[str, int] = {}
-    for token in statement.tokens:
+    for token in statement.flatten():
         if token.ttype in sqlparse.tokens.Name.Placeholder:
             index = params_map.setdefault(token.value, len(params_map))
             new_tokens.append("?" + str(index + 1))
