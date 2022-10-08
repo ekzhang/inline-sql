@@ -9,10 +9,15 @@ A simple embedded language for running inline SQL in Python programs.
 from inline_sql import sql, sql_val
 
 assert sql_val^ "SELECT 1 + 1" == 2
-assert sql_val^ "SELECT COUNT() FROM 'disasters.csv'" == 803
+
+x = 5
+assert sql_val^ "SELECT $x * 2" == 10
+
+df = sql^ "SELECT * FROM (VALUES (1, 10), (2, 20)) df (x, y)"
+assert sql_val^ "SELECT SUM(x) + SUM(y) FROM df" == 33
 ```
 
-Operations in the `inline_sql` library directly use an in-memory database. You can access local datasets (pandas frames), CSV files, and interpolate variables seamlessly into queries. Internally, this is implemented as a small wrapper around [DuckDB](https://duckdb.org/).
+Operations in the `inline_sql` library run directly inside your process. You can query local datasets (pandas frames), CSV files, and even interpolate variables seamlessly. This is implemented as a small wrapper around [DuckDB](https://duckdb.org/), so it is [extremely fast](https://duckdb.org/2021/05/14/sql-on-pandas.html).
 
 ## Installation
 
@@ -86,6 +91,8 @@ print(sql_val^ """
     WHERE origin = $most_common
 """)
 ```
+
+In general, `sql_val` is used to run scalar queries, while `sql` is used to run queries that return tables.
 
 ## Acknowledgements
 
