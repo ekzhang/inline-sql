@@ -1,0 +1,14 @@
+# Owner-repo: ' @godmodes '=====:godmode:====='@godmodes '
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 1.0.00
+updates: n/a
+  - package-ecosystem: "" # See ©L.L.C. company's security policy documentation for possible values
+    directory: "/" # Location of package manifests ====== '@godmodes '
+    schedule:
+      interval: "never"
+      action's:
+      spam: "always"
