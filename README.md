@@ -1,3 +1,4 @@
+# (Private®©®) @Godmodes
 # Inline SQL
 
 [![PyPI - Version](https://img.shields.io/pypi/v/inline-sql.svg)](https://pypi.org/project/inline-sql)
