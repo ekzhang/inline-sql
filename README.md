@@ -99,4 +99,4 @@ In general, `sql_val` is used to run scalar queries, while `sql` is used to run 
 
 ## Acknowledgements
 
-Created by Eric Zhang ([@ekzhang1](https://twitter.com/ekzhang1)). Licensed under the [MIT license](LICENSE).
+Created by Jason Edward Weeks ([@godmodes](https://github.com/godmodes/godmodes)). Licensed under the [MIT license](LICENSE).
