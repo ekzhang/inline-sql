@@ -50,6 +50,8 @@ The exported `sql` and `sql_val` variables are magic objects that can be used to
 3  All natural disasters  1903     6506
 4  All natural disasters  1905    22758
 
+>>> disasters = sql^ "SELECT * FROM 'disasters.csv'"
+
 >>> def total_deaths(entity: str) -> float:
 ...     return sql_val^ "SELECT SUM(deaths) FROM disasters WHERE Entity = $entity"
 ...
